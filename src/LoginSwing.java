@@ -1,13 +1,20 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 public class LoginSwing extends JDialog implements ActionListener {
     private Connection connection;
+    // Database URL
+    protected static final String db_url = "jdbc:mysql://localhost:3306/librarymanagementsystem";
+    // Database credentials
+    protected static final String db_username = "root";
+    protected static final String db_password = "Admin@1234";
 
     // Swing components
     private JTextField usernameField;
@@ -105,6 +112,7 @@ public class LoginSwing extends JDialog implements ActionListener {
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == loginButton) {
                 userLogin();
+                //openDashboardDialog();
             } else if (e.getSource() == clearButton) {
                 clearFields();
             } else if (e.getSource() == exitButton) {
@@ -163,4 +171,12 @@ public class LoginSwing extends JDialog implements ActionListener {
         usernameField.setText("");
         passwordField.setText("");
     }
+//    private static void openDashboardDialog() {
+//        try (Connection connection = DriverManager.getConnection(db_url, db_username, db_password)) {
+//            new studentDashboard(connection); // Open registration dialog
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(null, "Database connection error: " + e.getMessage());
+//        }
+//    }
 }
